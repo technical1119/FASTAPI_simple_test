@@ -12,9 +12,7 @@ def createDriver() -> webdriver.Chrome:
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--window-size=1920,1080')
-    chrome_options.add_argument('--remote-debugging-port=9222')
-    
-    service = Service(executable_path='/usr/local/bin/chromedriver')
+    chrome_options.binary_location = '/usr/bin/google-chrome'
     
     driver = webdriver.Chrome(
         service=service,
