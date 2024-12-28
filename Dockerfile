@@ -4,7 +4,7 @@ FROM python:3.9-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Install dependencies for Chrome and Selenium
+# Install dependencies for Chromium
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
