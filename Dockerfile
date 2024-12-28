@@ -1,3 +1,4 @@
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
 # Set the working directory inside the container
@@ -26,7 +27,7 @@ RUN apt-get update && apt-get install -y \
     libxcomposite1 \
     libxdamage1 \
     libxtst6 \
-    chromium=114.0.5735.90-1 \
+    chromium \
     && rm -rf /var/lib/apt/lists/*
 
 # Install pip dependencies
