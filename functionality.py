@@ -10,14 +10,7 @@ def createDriver() -> webdriver.Chrome:
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-dev-shm-usage')
-    
-    try:
-        driver = webdriver.Chrome(
-            options=chrome_options
-        )
-    except Exception as e:
-        print(f"Error creating driver: {e}")
-        raise e
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     return driver
 
 async def getGoogleHomepage():
