@@ -1,1 +1,1 @@
-web: gunicorn app:app --worker-class aiohttp.worker.GunicornWebWorker
+web: uvicorn app:app --host 0.0.0.0 --port $PORT
