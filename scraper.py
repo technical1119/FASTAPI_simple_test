@@ -1,21 +1,24 @@
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 def getGoogleHomepage():
-    # Initialize WebDriver
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run headless
+    options = Options()
+    options.add_argument("--headless")  # Run in headless mode (no UI)
+    options.add_argument("--no-sandbox")  # Necessary for Docker
+    options.add_argument("--disable-dev-shm-usage")  # Fixes issue in Docker
+
+    # Set up ChromeDriver with the options
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-
-    # Open Google
+    # Open Google homepage
     driver.get("https://www.google.com")
 
-    content = driver.page_source
-    print(content)
+    # Print the title of the page
+    print(driver.title)
 
-    # Close the browser
     driver.quit()
 
 if __name__ == "__main__":
