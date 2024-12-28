@@ -1,11 +1,10 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import chromedriver_autoinstaller
 
 def getGoogleHomepage():
-    # Automatically install the correct version of ChromeDriver
-    chromedriver_autoinstaller.install()  # This will install the correct version based on Chromium
+    # Automatically install the correct version of ChromeDriver for the installed Chromium
+    chromedriver_autoinstaller.install()
 
     # Set Chrome options for headless mode
     options = Options()
@@ -23,7 +22,6 @@ def getGoogleHomepage():
     print(driver.title)
 
     driver.quit()
-
 
 
 
