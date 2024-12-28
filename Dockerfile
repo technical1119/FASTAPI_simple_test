@@ -21,12 +21,14 @@ RUN apt-get update && apt-get install -y \
     libgtk-3-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install the Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the requirements file into the container
+COPY requirements.txt /app/
 
-# Copy the scraper script to the container
-COPY main.py 
+# Install the Python dependencies
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Copy the scraper script into the container
+COPY scraper.py /app/
 
 # Run the scraper
-CMD ["python", "main.py"]
+CMD ["python", "/app/scraper.py"]
