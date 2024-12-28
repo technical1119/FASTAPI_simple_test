@@ -1,26 +1,34 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import chromedriver_autoinstaller
+from selenium.webdriver.common.by import By
+
+# Replace with your Railway URL
+REMOTE_URL = "https://standalone-chrome-production-c37d.up.railway.app"
 
 def getGoogleHomepage():
-    # Automatically install the correct version of ChromeDriver for the installed Chromium
-    chromedriver_autoinstaller.install()
-
-    # Set Chrome options for headless mode
+    # Set up Chrome options
     options = Options()
-    options.add_argument("--headless")  # Run in headless mode (no UI)
-    options.add_argument("--no-sandbox")  # Necessary for Docker
-    options.add_argument("--disable-dev-shm-usage")  # Fixes issue in Docker
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-    # Set up ChromeDriver with the options
-    driver = webdriver.Chrome(options=options)
+    # Connect to remote WebDriver
+    driver = webdriver.Remote(
+        command_executor=REMOTE_URL,
+        options=options
+    )
 
     # Open Google homepage
     driver.get("https://www.google.com")
-
+    
     # Print the title of the page
-    print(driver.title)
+    print("Title of the page:", driver.title)
+    
+    # Get page content
+    content = driver.page_source
+    print(content)
 
+    # Quit the driver
     driver.quit()
 
 
