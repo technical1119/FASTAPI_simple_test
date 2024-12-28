@@ -4,7 +4,7 @@ FROM python:3.9-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Install dependencies for Chrome, Selenium, and Python packages
+# Install dependencies for Chrome and Selenium
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
@@ -19,14 +19,19 @@ RUN apt-get update && apt-get install -y \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
     libgtk-3-0 \
-    gcc \
-    libffi-dev \
+    ca-certificates \
+    fonts-liberation \
+    libappindicator3-1 \
+    libnspr4 \
+    libnss3 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxtst6 \
+    chromium \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the requirements file into the container
+# Install pip dependencies
 COPY requirements.txt /app/
-
-# Install the Python dependencies
 RUN pip install --upgrade pip && pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy the scraper script into the container
